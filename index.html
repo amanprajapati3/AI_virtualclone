@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/output.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="index.css">
+  <title>Jarvis</title>
+</head>
+
+<body>
+  <div class="flex justify-center">
+    <div class="mt-[3%]">
+      <div class="w-96">
+        <img
+          src="https://e1.pxfuel.com/desktop-wallpaper/493/507/desktop-wallpaper-iron-man-new-iron-man-jarvis-top-iron-man-cartoon-iron-man.jpg"
+          alt="image">
+      </div>
+      <div id="name" class="text-white font-sans text-4xl p-5 "> Hello Sir! I am Jarvis</div>
+      <div>
+        <button id="button" class="text-black mt-10 ml-9 rounded-2xl text-xl font-medium active:scale-110 p-3">Click to
+          ask something from me</button>
+      </div>
+      <div>
+        <img
+          src="https://d112y698adiu2z.cloudfront.net/photos/production/software_photos/001/755/550/datas/original.gif"
+          alt="Computer man" style="width:160px;height:120px; margin-left: 100px; display: none; border-radius: 50%; "
+          id="voice">
+      </div>
+      <div class="text-white font-bold text-xl p-2" id="output">
+
+      </div>
+      <div id="action" class="text-white font-bold text-xl p-2">
+
+      </div>
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+
+
+  // jarvis assistant 
+  let btn = document.getElementById("button");
+  let output = document.getElementById("output");
+  let voice = document.getElementById("voice");
+
+  const speak = (text) => {
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'hi-GB'
+    speech.rate = 1;
+    speech.pitch = 1;
+    speech.volume = 1;
+    window.speechSynthesis.speak(speech);
+  }
+
+  const WishMe = () => {
+    let time = new Date();
+    hour = time.getHours();
+    if (hour >= 0 && hour < 12) {
+      speak("Good Morning sir I am jarvis How can i help you.");
+    }
+    else if (hour >= 12 && hour < 16) {
+      speak("Good Afternoon sir I am jarvis How can i help you.")
+    }
+    else {
+      speak("Good Evening sir I am jarvis How can i help you.")
+    }
+  }
+  // window.addEventListener('load', ()=>{
+  //    WishMe();
+  // })
+  btn.addEventListener('click', () => {
+    var output = document.getElementById('output');
+    let recognization = new webkitSpeechRecognition();
+    recognization.onstart = () => {
+      output.innerHTML = "Listening...";
+      btn.style.display = "none";
+      voice.style.display = "block";
+    }
+    recognization.onresult = (e) => {
+      var transcript = e.results[0][0].transcript;
+      output.innerHTML = transcript;
+      output.classList.remove("hide");
+      takeCommand(transcript.toLowerCase());
+      btn.style.display = "block";
+      voice.style.display = "none";
+    }
+    recognization.start();
+  })
+
+  function takeCommand(message) {
+    if (message.includes("hello") || message.includes("hey")) {
+      speak("Hello sir How are you.");
+    }
+    else if (message.includes("i am fine can you tell me about yourself")) {
+      speak("Good to know that you are fine well I am jarvis,a virtual assistant made by Mr Aman sir");
+    }
+    else if (message.includes("open youtube")) {
+      speak("Opening youtube");
+      window.open("https://youtube.com/");
+    }
+    else if (message.includes("open whatsapp")) {
+      speak("Opening whatsapp");
+      window.open("https://whatsapp.com/");
+    }
+    else if (message.includes("open google")) {
+      speak("Opening google");
+      window.open("https://google.com/");
+    }
+    else if (message.includes("open telegram")) {
+      speak("Opening telegram");
+      window.open("https://telegram.com/");
+    }
+    else if (message.includes("open instagram")) {
+      speak("Opening instagram");
+      window.open("https://instagram.com/");
+    }
+    else if (message.includes("who is gutter")) {
+      speak("gutter means oh! i got it you means Sonali she is 19 year short girl with cute face and have a little bit anger issue She lives in delhi You both are best friends for two years");
+    }
+    else {
+      speak("here what i found related to your search.");
+      window.open(`https://www.google.com/search?q=${message}`);
+    }
+  }
+
+</script>
+
+</html>

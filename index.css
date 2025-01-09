@@ -1,0 +1,31 @@
+body{
+   background-color: black;
+}
+#name{
+   text-shadow: 5px 5px 35px rgb(0, 251, 255);
+}
+#button{
+   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+   transition:1s;
+}
+#button:hover{
+   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5);
+   box-shadow: 4px 4px 12px yellow;
+}
+
+#name{
+   width: 20ch;
+   animation: typing 3s steps(20) infinite, blink.5s  forwards, backwards;
+   overflow: hidden;
+   white-space: nowrap;
+   border-right: 2px solid white;
+}
+
+@keyframes typing{
+ from{
+   width: 0;
+ }
+ to{
+   width: 100%;
+ }
+}
